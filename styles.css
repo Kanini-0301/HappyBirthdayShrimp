@@ -1,0 +1,1481 @@
+/* ================================================================
+   SUHANI'S BIRTHDAY SITE — styles.css
+   Design System: Classic, Aesthetic, Premium Pink
+   ================================================================ */
+
+/* ── Google Fonts already loaded via HTML ── */
+
+/* ================================================================
+   1. CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+   ================================================================ */
+:root {
+  /* ── Colour Palette ── */
+  --clr-blush-light:    #FFF0F5;   /* page background tint */
+  --clr-blush:          #FFD6E7;   /* soft blush */
+  --clr-rose:           #FFB6C1;   /* rose pink */
+  --clr-pink:           #FF85A1;   /* mid pink */
+  --clr-hot-pink:       #E75480;   /* deep rose / accents */
+  --clr-magenta:        #C2185B;   /* CTA / headings */
+  --clr-dark-wine:      #7B1040;   /* deep contrast */
+
+  /* ── Neutrals ── */
+  --clr-white:          #FFFFFF;
+  --clr-cream:          #FFF8F9;
+  --clr-text-dark:      #2D1B25;   /* primary text */
+  --clr-text-mid:       #6B3A52;   /* secondary text */
+  --clr-text-light:     #B07090;   /* muted text */
+
+  /* ── Gradients ── */
+  --gradient-hero:      linear-gradient(135deg, #C2185B 0%, #E75480 40%, #FF85A1 70%, #FFB6C1 100%);
+  --gradient-card:      linear-gradient(145deg, rgba(255,255,255,0.70) 0%, rgba(255,214,231,0.50) 100%);
+  --gradient-btn:       linear-gradient(135deg, #C2185B 0%, #E75480 100%);
+  --gradient-bg:        linear-gradient(160deg, #FFF0F5 0%, #FFE4EF 35%, #FFF0F5 65%, #FFD6E7 100%);
+  --gradient-poem-card: linear-gradient(160deg, rgba(255,255,255,0.85) 0%, rgba(255,182,193,0.30) 100%);
+  --gradient-letter:    linear-gradient(160deg, #FFFAFA 0%, #FFF0F5 100%);
+
+  /* ── Glassmorphism ── */
+  --glass-bg:           rgba(255, 255, 255, 0.45);
+  --glass-border:       rgba(255, 182, 193, 0.50);
+  --glass-shadow:       0 8px 40px rgba(194, 24, 91, 0.12);
+
+  /* ── Typography ── */
+  --font-display:       'Playfair Display', Georgia, serif;
+  --font-body:          'Lora', Georgia, serif;
+  --font-ui:            'Inter', system-ui, sans-serif;
+
+  /* ── Spacing ── */
+  --nav-height:         68px;
+  --section-padding:    clamp(2rem, 5vw, 5rem);
+
+  /* ── Borders & Radii ── */
+  --radius-sm:    10px;
+  --radius-md:    20px;
+  --radius-lg:    32px;
+  --radius-pill:  100px;
+
+  /* ── Shadows ── */
+  --shadow-soft:  0 4px 24px rgba(194, 24, 91, 0.08);
+  --shadow-card:  0 8px 40px rgba(194, 24, 91, 0.14);
+  --shadow-pop:   0 20px 60px rgba(194, 24, 91, 0.22);
+
+  /* ── Transitions ── */
+  --ease-smooth:  cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce:  cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+
+/* ================================================================
+   2. RESET & BASE
+   ================================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--gradient-bg);
+  background-attachment: fixed;
+  color: var(--clr-text-dark);
+  min-height: 100dvh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+ul { list-style: none; }
+
+/* ================================================================
+   3. FLOATING HEARTS BACKGROUND
+   ================================================================ */
+#hearts-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -60px;
+  font-size: 1.4rem;
+  opacity: 0;
+  animation: floatUp linear infinite;
+  user-select: none;
+  filter: drop-shadow(0 0 4px rgba(231, 84, 128, 0.35));
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  85% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-110vh) rotate(25deg) scale(1.1);
+    opacity: 0;
+  }
+}
+
+
+/* ================================================================
+   4. NAVIGATION
+   ================================================================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(1rem, 4vw, 2.5rem);
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 24px rgba(194, 24, 91, 0.08);
+  transition: background 0.3s var(--ease-smooth);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nav-heart {
+  font-size: 1.35rem;
+  color: var(--clr-hot-pink);
+  animation: heartPulse 2s ease-in-out infinite;
+}
+
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.25); }
+}
+
+.nav-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
+  font-weight: 600;
+  color: var(--clr-magenta);
+  letter-spacing: 0.01em;
+}
+
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-pill);
+  color: var(--clr-text-mid);
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: all 0.25s var(--ease-smooth);
+  position: relative;
+}
+
+.nav-tab .tab-icon {
+  font-size: 1.05rem;
+  line-height: 1;
+  transition: transform 0.3s var(--ease-bounce);
+}
+
+.nav-tab:hover .tab-icon {
+  transform: scale(1.2) translateY(-2px);
+}
+
+.nav-tab:hover {
+  color: var(--clr-hot-pink);
+  background: rgba(255, 133, 161, 0.12);
+}
+
+.nav-tab.active {
+  color: var(--clr-white);
+  background: var(--gradient-btn);
+  box-shadow: 0 4px 16px rgba(194, 24, 91, 0.30);
+}
+
+.nav-tab.active .tab-icon {
+  transform: scale(1.1);
+}
+
+
+/* ================================================================
+   5. MAIN CONTENT WRAPPER
+   ================================================================ */
+.main-content {
+  position: relative;
+  z-index: 1;
+  padding-top: var(--nav-height);
+}
+
+.section-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--section-padding) clamp(1rem, 5vw, 2.5rem);
+}
+
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: var(--clr-magenta);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.section-subheading {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+  color: var(--clr-text-light);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+
+/* ================================================================
+   6. PAGE SECTIONS — TRANSITIONS
+   ================================================================ */
+.page-section {
+  display: none;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: none;
+}
+
+.page-section.active {
+  display: block;
+  animation: sectionFadeIn 0.55s var(--ease-smooth) forwards;
+}
+
+@keyframes sectionFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ================================================================
+   7. HERO SECTION
+   ================================================================ */
+.hero {
+  position: relative;
+  min-height: clamp(380px, 60vh, 640px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.04);
+  transition: transform 8s ease-out;
+}
+
+.hero:hover .hero-bg-img {
+  transform: scale(1.08);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(45, 27, 37, 0.58) 0%,
+    rgba(194, 24, 91, 0.42) 50%,
+    rgba(45, 27, 37, 0.62) 100%
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--clr-white);
+  padding: 2rem clamp(1rem, 5vw, 3rem);
+  max-width: 720px;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-ui);
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--clr-rose);
+  margin-bottom: 0.75rem;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 0.2s var(--ease-smooth) forwards;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 8vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 0.4s var(--ease-smooth) forwards;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.35);
+}
+
+.hero-name {
+  font-style: italic;
+  background: linear-gradient(135deg, #FFD6E7, #FFB6C1, #FF85A1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 0.6s var(--ease-smooth) forwards;
+}
+
+.hero-divider {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--clr-rose);
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 0.8s var(--ease-smooth) forwards;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ================================================================
+   8. FEATURED PHOTOS
+   ================================================================ */
+.featured-photos {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(0.75rem, 3vw, 1.75rem);
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.featured-photo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  transition: transform 0.35s var(--ease-bounce);
+}
+
+.featured-photo-card:hover {
+  transform: translateY(-8px);
+}
+
+.photo-frame {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 3px solid rgba(255, 182, 193, 0.6);
+  width: clamp(140px, 22vw, 220px);
+  height: clamp(175px, 28vw, 275px);
+  background: var(--clr-blush);
+}
+
+.photo-frame.main-frame {
+  width: clamp(175px, 28vw, 280px);
+  height: clamp(220px, 35vw, 350px);
+  border-color: var(--clr-hot-pink);
+  box-shadow: var(--shadow-pop);
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-smooth);
+}
+
+.photo-frame:hover img {
+  transform: scale(1.06);
+}
+
+.photo-caption {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--clr-text-light);
+  text-align: center;
+}
+
+
+/* ================================================================
+   9. LETTER CTA BUTTON
+   ================================================================ */
+.letter-cta-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem 0 1rem;
+}
+
+.letter-cta-label {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--clr-text-light);
+}
+
+.letter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1rem 2.2rem;
+  background: var(--gradient-btn);
+  color: var(--clr-white);
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 6px 28px rgba(194, 24, 91, 0.40);
+  transition: all 0.3s var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+  animation: letterPulse 2.5s ease-in-out infinite;
+}
+
+.letter-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.letter-btn:hover::before { opacity: 1; }
+
+.letter-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 40px rgba(194, 24, 91, 0.50);
+  animation: none;
+}
+
+.letter-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.letter-btn-icon {
+  font-size: 1.25rem;
+  animation: wobble 2s ease-in-out infinite;
+}
+
+@keyframes letterPulse {
+  0%, 100% { box-shadow: 0 6px 28px rgba(194, 24, 91, 0.40); }
+  50%       { box-shadow: 0 8px 40px rgba(194, 24, 91, 0.60); }
+}
+
+@keyframes wobble {
+  0%, 100% { transform: rotate(0deg); }
+  25%       { transform: rotate(-10deg); }
+  75%       { transform: rotate(10deg); }
+}
+
+
+/* ================================================================
+   10. GALLERY / MEMORIES
+   ================================================================ */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.memory-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--gradient-card);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.35s var(--ease-bounce), box-shadow 0.35s var(--ease-smooth);
+  cursor: pointer;
+}
+
+.memory-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-pop);
+}
+
+/* Photo container: height adapts to image's natural proportions */
+.memory-photo {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--clr-blush);
+}
+
+.memory-photo img {
+  width: 100%;
+  height: auto;           /* natural height — no cropping */
+  display: block;
+  transition: transform 0.6s var(--ease-smooth);
+}
+
+.memory-card:hover .memory-photo img {
+  transform: scale(1.04);
+}
+
+.memory-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(45, 27, 37, 0.45) 0%, transparent 55%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0.75rem;
+  font-size: 1.4rem;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.memory-card:hover .memory-photo-overlay {
+  opacity: 1;
+}
+
+/* Expand hint shown on hover */
+.memory-expand-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.memory-expand-hint span {
+  background: rgba(45, 27, 37, 0.55);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(6px);
+}
+
+.memory-card:hover .memory-expand-hint {
+  opacity: 1;
+}
+
+.memory-note {
+  padding: 1.25rem 1.4rem 1.5rem;
+}
+
+.memory-date {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clr-hot-pink);
+  margin-bottom: 0.5rem;
+}
+
+.memory-text {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--clr-text-mid);
+  font-style: italic;
+}
+
+
+/* ================================================================
+   10b. MEMORY LIGHTBOX MODAL
+   ================================================================ */
+.memory-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(30, 10, 20, 0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease-smooth);
+}
+
+.memory-modal-backdrop.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.memory-modal-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 760px;
+  max-height: 92dvh;
+  border-radius: var(--radius-lg);
+  background: var(--gradient-card);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-pop);
+  overflow: hidden;
+  transform: scale(0.88) translateY(28px);
+  transition: transform 0.4s var(--ease-bounce);
+}
+
+.memory-modal-backdrop.open .memory-modal-box {
+  transform: scale(1) translateY(0);
+}
+
+/* Image area: natural size, scrollable if very tall */
+.memory-modal-img-wrap {
+  width: 100%;
+  overflow-y: auto;
+  background: var(--clr-cream);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  max-height: 60dvh;
+}
+
+.memory-modal-img-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Note area below the image */
+.memory-modal-note {
+  padding: 1.4rem 1.75rem 1.75rem;
+  border-top: 1px solid var(--glass-border);
+  overflow-y: auto;
+}
+
+.memory-modal-date {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clr-hot-pink);
+  margin-bottom: 0.65rem;
+}
+
+.memory-modal-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--clr-text-mid);
+  font-style: italic;
+}
+
+/* Close button top-right of modal box */
+.memory-modal-close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  z-index: 10;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(45, 27, 37, 0.55);
+  color: #fff;
+  font-size: 0.85rem;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.memory-modal-close:hover {
+  background: rgba(194, 24, 91, 0.75);
+  transform: scale(1.1);
+}
+
+@media (max-width: 480px) {
+  .memory-modal-box { border-radius: var(--radius-md); }
+  .memory-modal-note { padding: 1rem 1.1rem 1.4rem; }
+  .memory-modal-img-wrap { max-height: 55dvh; }
+}
+
+
+/* ================================================================
+   11. POEM SECTION
+   ================================================================ */
+.poem-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+}
+
+.poem-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.poem-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--clr-text-light);
+  margin-bottom: 0.5rem;
+}
+
+.poem-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--clr-magenta);
+  margin-bottom: 0.75rem;
+}
+
+.poem-divider {
+  font-size: 0.75rem;
+  letter-spacing: 0.5em;
+  color: var(--clr-pink);
+}
+
+.poem-card {
+  max-width: 640px;
+  width: 100%;
+  background: var(--gradient-poem-card);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 3rem);
+  box-shadow: var(--shadow-pop);
+  position: relative;
+  overflow: hidden;
+}
+
+.poem-card::before {
+  content: '♡';
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 5rem;
+  color: rgba(255, 133, 161, 0.10);
+  pointer-events: none;
+  line-height: 1;
+}
+
+.poem-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.poem-stanza {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+  line-height: 1.85;
+  color: var(--clr-text-dark);
+  font-style: italic;
+}
+
+.poem-closer {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--clr-magenta);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.poem-signature {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  color: var(--clr-text-light);
+  letter-spacing: 0.08em;
+  text-align: right;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+
+/* ================================================================
+   12. LETTER MODAL
+   ================================================================ */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(45, 27, 37, 0.60);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-smooth);
+}
+
+.modal-backdrop.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.letter-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90dvh;
+  overflow-y: auto;
+  border-radius: var(--radius-lg);
+  background: var(--gradient-letter);
+  border: 1px solid rgba(255, 182, 193, 0.40);
+  box-shadow: var(--shadow-pop);
+  transform: scale(0.88) translateY(24px);
+  transition: transform 0.4s var(--ease-bounce), opacity 0.4s var(--ease-smooth);
+  scrollbar-width: thin;
+  scrollbar-color: var(--clr-rose) transparent;
+}
+
+.modal-backdrop.open .letter-modal-content {
+  transform: scale(1) translateY(0);
+}
+
+.modal-close-btn {
+  position: sticky;
+  top: 0.75rem;
+  float: right;
+  margin: 0.75rem 0.75rem 0 0;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(194, 24, 91, 0.12);
+  color: var(--clr-magenta);
+  font-size: 0.85rem;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+  z-index: 1;
+}
+
+.modal-close-btn:hover {
+  background: rgba(194, 24, 91, 0.22);
+  transform: scale(1.1);
+}
+
+.letter-paper {
+  padding: 2rem 2.5rem 3rem;
+  clear: both;
+}
+
+.letter-wax-seal {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  display: block;
+  animation: sealWiggle 1.5s ease-in-out;
+}
+
+@keyframes sealWiggle {
+  0%  { transform: scale(0) rotate(-20deg); }
+  60% { transform: scale(1.2) rotate(5deg); }
+  100%{ transform: scale(1) rotate(0deg); }
+}
+
+.letter-date {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: var(--clr-text-light);
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+}
+
+.letter-salutation {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--clr-magenta);
+  margin-bottom: 1.25rem;
+}
+
+.letter-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.letter-body p {
+  font-family: var(--font-body);
+  font-size: 0.97rem;
+  line-height: 1.85;
+  color: var(--clr-text-mid);
+}
+
+.letter-celebration {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--clr-magenta) !important;
+  text-align: center;
+  margin-top: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+.letter-sign-off {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--clr-text-light);
+  margin-top: 1.75rem;
+}
+
+.letter-signature {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--clr-magenta);
+  margin-top: 0.25rem;
+}
+
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--clr-rose);
+  border-radius: 100px;
+}
+
+
+
+/* ================================================================
+   13a. PASSWORD GATE
+   ================================================================ */
+
+/* Full-screen overlay — sits above everything */
+#password-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--gradient-hero);
+  transition: opacity 0.8s var(--ease-smooth), transform 0.8s var(--ease-smooth);
+}
+
+/* Overlay fades and scales away when .unlocked is added */
+#password-gate.unlocked {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.04);
+}
+
+/* Glassmorphism card */
+.gate-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1.5px solid rgba(255, 255, 255, 0.38);
+  border-radius: var(--radius-lg);
+  padding: clamp(2rem, 6vw, 3rem) clamp(1.5rem, 6vw, 2.8rem);
+  box-shadow:
+    0 8px 48px rgba(45, 27, 37, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Subtle pink glow blob behind the card */
+.gate-card::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  translate: -50% 0;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(255, 133, 161, 0.35) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gate-lock-icon {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  display: block;
+  position: relative;
+  z-index: 1;
+  animation: lockBounce 1.8s var(--ease-bounce) forwards;
+}
+
+@keyframes lockBounce {
+  0%   { transform: scale(0) rotate(-15deg); opacity: 0; }
+  60%  { transform: scale(1.2) rotate(5deg);  opacity: 1; }
+  100% { transform: scale(1)   rotate(0deg);  opacity: 1; }
+}
+
+.gate-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--clr-white);
+  text-shadow: 0 2px 16px rgba(45, 27, 37, 0.3);
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.gate-subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.90);
+  margin-bottom: 0.2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.gate-prompt {
+  font-family: var(--font-ui);
+  font-size: clamp(0.78rem, 2vw, 0.88rem);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.70);
+  margin-bottom: 1.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Form */
+.gate-form {
+  position: relative;
+  z-index: 1;
+}
+
+.gate-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: var(--radius-pill);
+  padding: 0.2rem 0.2rem 0.2rem 1.2rem;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  box-shadow: 0 2px 12px rgba(45, 27, 37, 0.12);
+}
+
+.gate-input-wrap:focus-within {
+  border-color: rgba(255, 255, 255, 0.80);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.18), 0 4px 20px rgba(45, 27, 37, 0.18);
+}
+
+.gate-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--clr-white);
+  caret-color: var(--clr-white);
+  min-width: 0;
+}
+
+.gate-input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+  font-style: italic;
+}
+
+.gate-submit-btn {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--clr-magenta);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s var(--ease-bounce);
+  box-shadow: 0 2px 10px rgba(45, 27, 37, 0.18);
+}
+
+.gate-submit-btn:hover {
+  background: var(--clr-white);
+  transform: scale(1.12);
+}
+
+.gate-submit-btn:active {
+  transform: scale(0.95);
+}
+
+/* Hint message */
+.gate-hint {
+  min-height: 1.4rem;
+  margin-top: 0.9rem;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.88);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.gate-hint.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Shake animation on wrong password */
+@keyframes gateShake {
+  0%, 100% { transform: translateX(0); }
+  18%       { transform: translateX(-8px); }
+  36%       { transform: translateX(8px); }
+  54%       { transform: translateX(-5px); }
+  72%       { transform: translateX(5px); }
+  90%       { transform: translateX(-2px); }
+}
+
+.gate-input-wrap.shake {
+  animation: gateShake 0.5s var(--ease-smooth);
+  border-color: rgba(255, 180, 180, 0.75);
+}
+
+/* Decorative floating hearts at the bottom of the card */
+.gate-hearts {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.gate-hearts span {
+  color: rgba(255, 255, 255, 0.65);
+  animation: staticHeartFloat 4s ease-in-out infinite alternate;
+}
+.gate-hearts span:nth-child(1) { animation-duration: 3.5s; animation-delay: 0s;    }
+.gate-hearts span:nth-child(2) { animation-duration: 4.2s; animation-delay: 0.5s;  }
+.gate-hearts span:nth-child(3) { animation-duration: 3.8s; animation-delay: 1s;    }
+.gate-hearts span:nth-child(4) { animation-duration: 4.5s; animation-delay: 0.3s;  }
+.gate-hearts span:nth-child(5) { animation-duration: 3.6s; animation-delay: 0.8s;  }
+
+
+
+
+/* Outer wrapper: fills viewport below nav, centres everything */
+.collage-hero {
+  position: relative;
+  min-height: calc(100dvh - var(--nav-height));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 5vw, 2rem) clamp(2rem, 4vw, 3rem);
+  overflow: hidden;
+}
+
+/* ── Static decorative hearts sprinkled around edges ── */
+.static-hearts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.static-hearts span {
+  position: absolute;
+  color: var(--clr-hot-pink);
+  opacity: 0.55;
+  animation: staticHeartFloat 6s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 6px rgba(231, 84, 128, 0.3));
+}
+
+.static-hearts span:nth-child(odd)  { animation-duration: 5s; }
+.static-hearts span:nth-child(3n)   { animation-duration: 7s; }
+.static-hearts span:nth-child(4n)   { animation-delay: -2s; }
+
+@keyframes staticHeartFloat {
+  from { transform: translateY(0px) rotate(var(--rot, 0deg)); }
+  to   { transform: translateY(-10px) rotate(var(--rot, 0deg)); }
+}
+
+/* ── Main 3-column layout: photos | text | photos ── */
+.collage-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  width: 100%;
+  max-width: 1050px;
+  position: relative;
+  z-index: 2;
+  flex-wrap: nowrap;
+}
+
+/* Column of stacked tilted photos */
+.collage-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.7rem, 2vw, 1.4rem);
+  flex-shrink: 0;
+}
+
+/* Individual photo frame — now in normal flow, just rotated */
+.collage-frame {
+  position: relative;
+  width: clamp(105px, 13vw, 178px);
+  height: clamp(130px, 16.5vw, 220px);
+  border-radius: var(--radius-md);
+  overflow: visible;
+  box-shadow: var(--shadow-pop);
+  border: 3px solid rgba(255, 255, 255, 0.82);
+  background: var(--clr-blush);
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.4s var(--ease-bounce), box-shadow 0.3s;
+  cursor: default;
+  flex-shrink: 0;
+}
+
+.collage-frame:hover {
+  transform: rotate(0deg) scale(1.07);
+  box-shadow: 0 24px 60px rgba(194, 24, 91, 0.32);
+}
+
+.collage-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: calc(var(--radius-md) - 3px);
+  display: block;
+}
+
+/* Heart badge on each frame */
+.cframe-heart {
+  position: absolute;
+  top: -13px;
+  right: -11px;
+  font-size: 1.35rem;
+  filter: drop-shadow(0 2px 4px rgba(194, 24, 91, 0.45));
+  animation: heartPulse 2.2s ease-in-out infinite;
+  z-index: 3;
+}
+
+/* ── Central birthday text (sits between the photo columns) ── */
+.collage-center {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  flex-shrink: 0;
+  /* glassmorphism card, generous padding so no descenders clip */
+  background: rgba(255, 240, 245, 0.72);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1.5px solid rgba(255, 182, 193, 0.55);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem 2rem;   /* equal top/bottom, equal left/right */
+  box-shadow: 0 8px 40px rgba(194, 24, 91, 0.14);
+  min-width: clamp(180px, 20vw, 260px);
+  overflow: visible;
+}
+
+.collage-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  line-height: 1.1;
+}
+
+.collage-happy {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 3.5vw, 1.55rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--clr-hot-pink);
+  letter-spacing: 0.04em;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 0.3s var(--ease-smooth) forwards;
+}
+
+.collage-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 9vw, 5.5rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.2;
+  margin-top: -0.12em;   /* pull Sugar closer to Happy Birthday */
+  padding: 0.18em 0.12em; /* equal top/bottom for descender, equal left/right for italic slant */
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 0.55s var(--ease-smooth) forwards;
+  text-shadow: none;
+  letter-spacing: -0.01em;
+}
+
+/* ── Letter CTA positioned below the layout row ── */
+.collage-cta {
+  position: relative;
+  z-index: 5;
+  margin-top: 2.5rem;
+  padding: 0;
+}
+
+
+
+
+/* ================================================================
+   14. RESPONSIVE — MOBILE FIRST
+   ================================================================ */
+
+/* -- Small phones (≤ 480px) -- */
+@media (max-width: 480px) {
+  :root { --nav-height: 60px; }
+
+  .nav-title { font-size: 1rem; }
+  .nav-tab   { padding: 0.35rem 0.6rem; font-size: 0.65rem; }
+
+  /* Stack collage vertically on phones */
+  .collage-layout {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .collage-col {
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+  .collage-frame {
+    width: clamp(85px, 22vw, 120px);
+    height: clamp(105px, 27vw, 148px);
+  }
+  .collage-center {
+    padding: 1.2rem 1.5rem; /* equal top/bottom on mobile */
+    min-width: unset;
+    width: clamp(220px, 72vw, 340px);
+  }
+  .collage-name { font-size: clamp(2.2rem, 13vw, 3.4rem); }
+
+  .letter-paper { padding: 1.5rem 1.25rem 2rem; }
+}
+
+/* -- Tablets (≤ 768px) -- */
+@media (max-width: 768px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+  .poem-card    { padding: 1.75rem 1.25rem; }
+
+  .collage-frame {
+    width: clamp(95px, 12vw, 148px);
+    height: clamp(118px, 15vw, 184px);
+  }
+  .collage-center { min-width: clamp(160px, 16vw, 220px); }
+}
+
+/* -- Very small screens (≤ 360px) -- */
+@media (max-width: 360px) {
+  .nav-tabs  { gap: 0.1rem; }
+  .tab-label { display: none; }
+  .nav-tab   { padding: 0.45rem 0.55rem; font-size: 0; }
+  .nav-tab .tab-icon { font-size: 1.1rem; }
+
+  .collage-frame {
+    width: clamp(70px, 18vw, 100px);
+    height: clamp(87px, 22vw, 124px);
+  }
+}

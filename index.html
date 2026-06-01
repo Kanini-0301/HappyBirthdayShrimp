@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday, Suhani 🌸</title>
+  <meta name="description" content="Nothing too big only what lil ol prawn could manage to do :c" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- ===================== PASSWORD GATE ===================== -->
+  <div id="password-gate" role="dialog" aria-modal="true" aria-label="Password Gate">
+    <div class="gate-card">
+      <div class="gate-lock-icon" aria-hidden="true">🔒</div>
+      <h1 class="gate-title">Who are you?</h1>
+      <p class="gate-subtitle">If you are Shrimp then prove it.</p>
+      <p class="gate-prompt">Enter the password.</p>
+      <form class="gate-form" id="gate-form" onsubmit="checkPassword(event)">
+        <div class="gate-input-wrap">
+          <input type="password" id="gate-input" class="gate-input" placeholder="your password…" autocomplete="off"
+            aria-label="Password" />
+          <button type="submit" class="gate-submit-btn" aria-label="Submit password">
+            <span>✦</span>
+          </button>
+        </div>
+        <p class="gate-hint" id="gate-hint" aria-live="polite"></p>
+      </form>
+      <div class="gate-hearts" aria-hidden="true">
+        <span>♡</span><span>💕</span><span>🩷</span><span>♥</span><span>💗</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== FLOATING HEARTS CANVAS ===================== -->
+  <div id="hearts-container" aria-hidden="true"></div>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand">
+      <span class="nav-heart">♡</span>
+      <span class="nav-title">Suhani</span>
+    </div>
+    <ul class="nav-tabs" role="tablist">
+      <li>
+        <button class="nav-tab active" id="tab-home" role="tab" aria-selected="true" aria-controls="section-home"
+          onclick="showSection('home')">
+          <span class="tab-icon">🌸</span>
+          <span class="tab-label">HBD</span>
+        </button>
+      </li>
+      <li>
+        <button class="nav-tab" id="tab-gallery" role="tab" aria-selected="false" aria-controls="section-gallery"
+          onclick="showSection('gallery')">
+          <span class="tab-icon">📷</span>
+          <span class="tab-label">random bs go!</span>
+        </button>
+      </li>
+      <li>
+        <button class="nav-tab" id="tab-poem" role="tab" aria-selected="false" aria-controls="section-poem"
+          onclick="showSection('poem')">
+          <span class="tab-icon">✦</span>
+          <span class="tab-label">MY ODE TO YOU</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <main class="main-content">
+
+    <!-- ========== HOME SECTION ========== -->
+    <section class="page-section active" id="section-home" role="tabpanel" aria-labelledby="tab-home">
+
+      <!-- ── Photo Collage Hero ── -->
+      <div class="collage-hero">
+
+        <!-- Decorative floating hearts around the edges -->
+        <div class="static-hearts" aria-hidden="true">
+          <span style="top:6%;left:4%;font-size:1.7rem;transform:rotate(-15deg);">♡</span>
+          <span style="top:18%;left:8%;font-size:1rem;transform:rotate(10deg);">💕</span>
+          <span style="top:4%;left:48%;font-size:1.3rem;transform:rotate(-8deg);">♥</span>
+          <span style="top:10%;right:8%;font-size:1.5rem;transform:rotate(-20deg);">♡</span>
+          <span style="top:20%;right:4%;font-size:1rem;transform:rotate(12deg);">🩷</span>
+          <span style="bottom:22%;left:4%;font-size:1.2rem;transform:rotate(18deg);">💗</span>
+          <span style="bottom:8%;left:30%;font-size:0.95rem;transform:rotate(-12deg);">♡</span>
+          <span style="bottom:8%;right:30%;font-size:1.4rem;transform:rotate(8deg);">💕</span>
+          <span style="bottom:20%;right:4%;font-size:1.1rem;transform:rotate(-22deg);">♥</span>
+          <span style="top:46%;left:1%;font-size:1.1rem;transform:rotate(5deg);">💖</span>
+          <span style="top:46%;right:1%;font-size:1.3rem;transform:rotate(-10deg);">♡</span>
+          <span style="top:3%;left:22%;font-size:0.85rem;transform:rotate(20deg);">💓</span>
+          <span style="top:3%;right:22%;font-size:0.85rem;transform:rotate(-18deg);">💖</span>
+        </div>
+
+        <!-- Main layout: left photos | centre text | right photos -->
+        <div class="collage-layout">
+
+          <!-- Left column of photos -->
+          <div class="collage-col" id="col-left">
+            <div class="collage-frame" style="--rot:-8deg;">
+              <img src="assets/suhani1.png" alt="Photo 1" />
+              <span class="cframe-heart">♡</span>
+            </div>
+            <div class="collage-frame" style="--rot:6deg;">
+              <img src="assets/suhani5.png" alt="Photo 2" />
+              <span class="cframe-heart">💕</span>
+            </div>
+            <div class="collage-frame" style="--rot:-11deg;">
+              <img src="assets/suhani3.png" alt="Photo 3" />
+              <span class="cframe-heart">🩷</span>
+            </div>
+          </div>
+
+          <!-- Centre: birthday text -->
+          <div class="collage-center">
+            <h1 class="collage-title">
+              <span class="collage-happy">Happy Birthday</span>
+              <span class="collage-name">Sugar</span>
+            </h1>
+          </div>
+
+          <!-- Right column of photos -->
+          <div class="collage-col" id="col-right">
+            <div class="collage-frame" style="--rot:9deg;">
+              <img src="assets/suhani6.png" alt="Photo 4" />
+              <span class="cframe-heart">♥</span>
+            </div>
+            <div class="collage-frame" style="--rot:-6deg;">
+              <img src="assets/suhani4.png" alt="Photo 5" />
+              <span class="cframe-heart">💗</span>
+            </div>
+            <div class="collage-frame" style="--rot:13deg;">
+              <img src="assets/suhani2.png" alt="Photo 6" />
+              <span class="cframe-heart">♡</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Letter CTA -->
+        <div class="letter-cta-wrapper collage-cta">
+          <p class="letter-cta-label">Here you go Shrimp..</p>
+          <button class="letter-btn" id="open-letter-btn" onclick="openLetter()" aria-label="Open letter for Suhani">
+            <span class="letter-btn-icon">💌</span>
+            <span>Some stupid words from your Prawn</span>
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========== GALLERY SECTION ========== -->
+    <section class="page-section" id="section-gallery" role="tabpanel" aria-labelledby="tab-gallery">
+      <div class="section-container">
+        <h2 class="section-heading">Some moments</h2>
+        <p class="section-subheading">You know I scroll back on our chats but lemme show you what I scroll back to on my
+          gallery &lt;3</p>
+
+        <div class="gallery-grid">
+
+          <article class="memory-card" id="memory-card-1" onclick="openMemory(this)">
+            <div class="memory-photo">
+              <img src="assets/memory1.png" alt="Memory 1" loading="lazy" />
+              <div class="memory-photo-overlay"><span>🌸</span></div>
+              <div class="memory-expand-hint"><span>View Memory</span></div>
+            </div>
+            <div class="memory-note">
+              <p class="memory-date">the first ss i have of us</p>
+              <p class="memory-text">I remember playing death penalty for the first time with you all and I found out
+                that I can stand on
+                people's heads lmao I knew I wanted to be on top of you (not in that way you freak) this still remains
+                one of my favourite death penalty moments.
+              </p>
+            </div>
+          </article>
+
+          <article class="memory-card" id="memory-card-2" onclick="openMemory(this)">
+            <div class="memory-photo">
+              <img src="assets/memory2.png" alt="Memory 2" loading="lazy" />
+              <div class="memory-photo-overlay"><span>✿</span></div>
+              <div class="memory-expand-hint"><span>View Memory</span></div>
+            </div>
+            <div class="memory-note">
+              <p class="memory-date">First matching pfp yay</p>
+              <p class="memory-text">I remember looking at random dispatch pfps and sending them on the server and then
+                you asked me if I wanted to match(yes I did)
+                and maybe it wasn't so random that I found then and sent them ;) you are still the bhondu blazer to my
+                kawni kawnini and you will always be my bhondu blazer mwah
+              </p>
+            </div>
+          </article>
+
+          <article class="memory-card" id="memory-card-3" onclick="openMemory(this)">
+            <div class="memory-photo">
+              <img src="assets/memory3.png" alt="Memory 3" loading="lazy" />
+              <div class="memory-photo-overlay"><span>🎂</span></div>
+              <div class="memory-expand-hint"><span>View Memory</span></div>
+            </div>
+            <div class="memory-note">
+              <p class="memory-date">Matching roxbox avatars yesss</p>
+              <p class="memory-text">I got robux and wanted to make avatars yes oh what did you say? matching avatars?
+                hell fucking yeah
+                I love the fit so much because 1 its deftones and its cool and 2 since we got it matching together we
+                need to get a couple more honestly. This
+                is my fav avatar of yours yes bc we match(wait the one with the glasses might be a close 2nd yk me bb😝)
+              </p>
+            </div>
+          </article>
+
+          <article class="memory-card" id="memory-card-4" onclick="openMemory(this)">
+            <div class="memory-photo">
+              <img src="assets/memory4.png" alt="Memory 4" loading="lazy" />
+              <div class="memory-photo-overlay"><span>✨</span></div>
+              <div class="memory-expand-hint"><span>View Memory</span></div>
+            </div>
+            <div class="memory-note">
+              <p class="memory-date">YOUR BIG BALL!</p>
+              <p class="memory-text">I always enjoy being in your ball and letting you protect me but I know I haven't
+                been doing that as often now.
+                I just don't want to chipku too much to you and make you get annoyed or something. I love playing
+                deathball and staying in your ball please keep letting me stay in your ball thank you!
+              </p>
+            </div>
+          </article>
+
+          <article class="memory-card" id="memory-card-5" onclick="openMemory(this)">
+            <div class="memory-photo">
+              <img src="assets/memory5.png" alt="Memory 5" loading="lazy" />
+              <div class="memory-photo-overlay"><span>🍰</span></div>
+              <div class="memory-expand-hint"><span>View Memory</span></div>
+            </div>
+            <div class="memory-note">
+              <p class="memory-date">Resident Evil streamsss</p>
+              <p class="memory-text">My favourite parts of the game except for well the starting sequence its too goated
+                is what I played with you on stream
+                It was so nice having you as company watching me play it. We haven't really done that with any other
+                game I hope we do soon.. I miss those times
+                I want you to be a loyal watcher to your loyal personal streamer smhhhh. and yes yes I am your tsundere
+                Ada.
+              </p>
+            </div>
+          </article>
+
+          <article class="memory-card" id="memory-card-6" onclick="openMemory(this)">
+            <div class="memory-photo">
+              <img src="assets/memory6.png" alt="Memory 6" loading="lazy" />
+              <div class="memory-photo-overlay"><span>🌟</span></div>
+              <div class="memory-expand-hint"><span>View Memory</span></div>
+            </div>
+            <div class="memory-note">
+              <p class="memory-date">thats my sugar!!! arghh</p>
+              <p class="memory-text">I remember this so well. You were pissed at minecraft didn't want to play it
+                because it was new
+                and you felt left out but the next day you decided to give it another go and built the cutest house I
+                have laid my eyes on (dont tell me finn helped idgaf)I was super proud of you and I am always. Too bad I
+                cant live with you on that house :C </p>
+            </div>
+          </article>
+
+          <article class="memory-card" id="memory-card-7" onclick="openMemory(this)">
+            <div class="memory-photo">
+              <img src="assets/memory7.png" alt="Memory 7" loading="lazy" />
+              <div class="memory-photo-overlay"><span>🌹</span></div>
+              <div class="memory-expand-hint"><span>View Memory</span></div>
+            </div>
+            <div class="memory-note">
+              <p class="memory-date">BEST MOVIE NIGHT EVER!</p>
+              <p class="memory-text">I am so fucking glad I went through all that fomo and still didn't watch zootopia 2
+                it all led to that moment when we watched it together. I had the best time ever watching it with you one
+                of my fav movie watching memories I AM SO MAD I DIDNT TAKE ANY SCREENSHOTS THO but
+                I loved every second of it (well except for when Cassie came sorry).I AM RICK WILDE YOU ARE MY TRUDY
+                CABBAGEPATCH MWAHHH
+              </p>
+            </div>
+          </article>
+
+          <article class="memory-card" id="memory-card-8" onclick="openMemory(this)">
+            <div class="memory-photo">
+              <img src="assets/memory8.png" alt="Memory 8" loading="lazy" />
+              <div class="memory-photo-overlay"><span>🌊</span></div>
+              <div class="memory-expand-hint"><span>View Memory</span></div>
+            </div>
+            <div class="memory-note">
+              <p class="memory-date">hm yk what this was</p>
+              <p class="memory-text">I'm not gonna say much about this except I infact was not asleep. The date is there
+                go search it up on our chat if you want</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== POEM SECTION ========== -->
+    <section class="page-section" id="section-poem" role="tabpanel" aria-labelledby="tab-poem">
+      <div class="section-container poem-container">
+        <div class="poem-header">
+          <h2 class="poem-title">For My Suhani</h2>
+          <div class="poem-divider">✦ ✦ ✦</div>
+        </div>
+
+        <div class="poem-card" id="poem-card">
+          <div class="poem-body">
+            <p class="poem-stanza">
+              I met you and thought just what even are you?<br />
+              oh it's Sugar sweet sweet Sugar<br />
+              I find you in everything now movies, songs, poems<br />
+              anything I see I go "oh, it's her"<br />
+              I tried you for the first time<br />
+              Yeah now I crave you for a lifetime<br />
+              Never had I known someone like you<br />
+              How do you just see everything through?
+            </p>
+            <p class="poem-stanza">
+              I'm now addicted to you<br />
+              Oh Sugar sweet sweet Sugar<br />
+              Teeth full of cavities but they didn't ruin me<br />
+              Took away the harshness of my bite<br />
+              You set a path straight for this vile heart of mine<br />
+              Just stay and now we will set it all right<br />
+              Like broken branches down a river<br />
+              I'll carry as much of you as I can<br />
+              And I know you would too
+            </p>
+            <p class="poem-stanza">
+              Each night we stay and see the sun rise<br />
+              But my day never dims to night, 'cause<br />
+              you are far brighter than any sun in my eye<br />
+              My eye yes, the one only with you it dries<br />
+              Yes I know you see them all, my flaws<br />
+              Even then you want to take me sky high<br />
+              You set me on an ever blazing fire,<br />
+              one that started calm now seeps in desire.
+            </p>
+            <p class="poem-stanza">
+              So I know that I may burn you as you touch,<br />
+              But I can only beg you to never loosen your clutch.<br />
+              It feels as though only your palms hold me together,<br />
+              But I still want to be your one, your heather,<br />
+              Through all the harsh kinds of weather.<br />
+              Just utter it I will wait through an eternity,<br />
+              Grit my rotten teeth and face any adversity.
+            </p>
+            <p class="poem-stanza">
+              So Sugar sweet sweet Sugar,<br />
+              Look into my eyes as I tell you.<br />
+              Don't you dare ever feel blue,<br />
+              at least not alone cause I'll be there too.<br />
+              If before they burn me and let my bones stew,<br />
+              The scent of vanilla would fill the room<br />
+              And you'd know then wouldn't you?<br />
+              That through everything I did always love you.
+            </p>
+            <p class="poem-closer">Happy Birthday, Suhani 🌸</p>
+          </div>
+          <div class="poem-signature">— with love ♡</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== LETTER MODAL ===================== -->
+  <div class="modal-backdrop" id="letter-modal" role="dialog" aria-modal="true" aria-label="A letter for Suhani"
+    onclick="closeLetter(event)">
+    <div class="letter-modal-content" id="letter-modal-content">
+      <button class="modal-close-btn" onclick="closeLetter()" aria-label="Close letter">✕</button>
+      <div class="letter-paper">
+        <div class="letter-wax-seal">💌</div>
+        <p class="letter-date">31st May, 2026</p>
+        <h3 class="letter-salutation">Dear Sugar,</h3>
+        <div class="letter-body">
+          <p>There are hundreds thousands things I wanna say to you today but I can't fit em all in so I'll eventually
+            tell them all throughout eternity now let me try to put some stuff into words because you deserve every
+            attempt I could make.</p>
+          <p>first off, Happy Birthday!!!! I hope this year also treats you with kindness and brings you all kinds of
+            fortune (ahem except me ig) along with every year to come. I love to have you as part of my life and I want
+            you to know that you are so loved and appreciated beyond your ability to recognize.</p>
+          <p>I also want you to know that meeting you and knowing you has been one of the greatest pleasures of my life.
+            You don't only exist in moments and memories you create them, with the way you laugh the way you care the
+            way you show up for everyone. It all matters way more than you know.</p>
+          <p>You carry something so special within you. The warmth that doesn't announce itself or be loud but fills
+            every crevice anywhere you are. People feel it even if they don't realize it. I feel it, always and will
+            continue to feel it.</p>
+          <p>Today is your day, Please if not for anything for me, let yourself be celebrated. You deserve to receive as
+            much if not more love than you give.</p>
+          <p>And I'd like to add this isn't only just for "Sugar" but also Suhani. With all her love and all her glory
+            all her kindness all her past and all her scars. You are a gift to this world (a very good one at that) I
+            thank your mom and dad for that. Who would've thought someone's daughter would have me celebrating them
+            shagging right?! But here we are I'll celebrate this day along with you my love, not only for the very
+            special occasion of you turning 19 but also the 18 years that you lived and stayed kind and amazing through
+            I won't let them be forgotten even if I didn't know you through them.</p>
+          <p>Everyone says that a person is lucky to be born winning the race of the millions bla bla. But the person
+            who actually got lucky when you were born is me. And I mean that.</p>
+          <p>So here's to your birthday once again my special sweet girl. Have lots of fun eat lots of cake okai bb? And
+            don't forget your Lil prawn at the end of the day 😝</p>
+          <p class="letter-celebration">❤️❤️❤️❤️ HAPPIEST BIRTHDAY SUHANIIIII I LOVE YOU SO MUCH MWAH 😋🫂😘 ❤️❤️❤️❤️
+          </p>
+        </div>
+        <p class="letter-sign-off">Ps: if anything I hope this stupid letter from me makes your day a little brighter.
+          Please reach out to me whenever you're in a dark place darling I swear it on everything I will be there for
+          you.</p>
+        <p class="letter-signature">— With love,
+          KAWNI </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== MEMORY LIGHTBOX MODAL ===================== -->
+  <div class="memory-modal-backdrop" id="memory-modal" role="dialog" aria-modal="true" aria-label="Memory detail"
+    onclick="closeMemory(event)">
+    <div class="memory-modal-box" id="memory-modal-box">
+      <button class="memory-modal-close" onclick="closeMemoryDirect()" aria-label="Close memory">✕</button>
+      <div class="memory-modal-img-wrap">
+        <img id="memory-modal-img" src="" alt="" />
+      </div>
+      <div class="memory-modal-note">
+        <p class="memory-modal-date" id="memory-modal-date"></p>
+        <p class="memory-modal-text" id="memory-modal-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
