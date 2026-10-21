@@ -7,7 +7,7 @@
    0. PASSWORD GATE
    ══════════════════════════════════════════════════════════ ── */
 
-const CORRECT_PASSWORD = 'iloveyoukawni'; // spaces stripped — comparison ignores spacing & case
+const CORRECT_PASSWORD = 'itslonggone'; // spaces stripped — comparison ignores spacing & case
 
 /**
  * Checks the entered password and either unlocks the site or
