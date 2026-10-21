@@ -39,7 +39,7 @@ function checkPassword(event) {
     void wrap.offsetWidth;
     wrap.classList.add('shake');
 
-    hint.textContent = 'hint: fucking hell';
+    hint.textContent = 'hint: fucking hell im sorry i am doing this when im not in good place in the head';
     hint.classList.add('visible');
 
     // Clear the input and re-focus
